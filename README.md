@@ -75,6 +75,9 @@ No install step: everything runs on Node 22+ with no dependencies.
 
 ## What was verified
 
+- **Two public agentic sites built by someone else** (2026-11-18), audited over real HTTPS with real CORS: `https://agent-atlas-phi.vercel.app` and `https://shutdown-clerk.pages.dev` — both **PASS**, 6 checks passed, 0 advisories, 1 skipped (`peer.call`, off by default). Neither was built with AgentLint, which is the point.
+- **The live deployment auditing itself** over HTTPS: `https://xegheplimo-web.github.io/agentlint` → **PASS**, 6 passed, 1 skipped.
+- **The live page in a real browser** (Chrome, CDP): typing a URL and pressing *Run audit* renders PASS for a conforming site and **FAIL** for a broken one, naming `expected: Access-Control-Allow-Origin response header`, `actual: absent` and `HTTP 404`.
 - **End-to-end in a real browser** (Playwright, real CORS enforcement between
   `http://127.0.0.1:8099` and the target): the page loads, the runtime boots, a
   conforming site (the reference pizza example on `:8098`) reports **PASS** with
