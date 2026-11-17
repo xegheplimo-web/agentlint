@@ -1,0 +1,7 @@
+{
+  "protocol": "nsdeploy-agent-mcp/v1",
+  "network": "agentlint",
+  "front_man": "conformance_analyst",
+  "available": false,
+  "reason": "Static site: there is no server to hold an MCP session; the same tools are exposed to callers through the action bridge."
+}

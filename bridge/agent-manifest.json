@@ -1,0 +1,10 @@
+{
+  "networks": [
+    {
+      "name": "agentlint"
+    }
+  ],
+  "actions": {
+    "version": 1
+  }
+}

@@ -1,0 +1,197 @@
+/* AgentLint site styles. */
+:root {
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 16px/1.55 system-ui, sans-serif;
+  color: #14201f;
+  background: #f7f9fa;
+}
+.site-header {
+  background: #175a7a;
+  color: #fff;
+  padding: 32px max(24px, calc(50vw - 400px));
+}
+.site-header h1 { margin: 0; font-size: 2rem; letter-spacing: 0.02em; }
+.tagline { margin: 6px 0 0; opacity: 0.9; }
+main { padding: 24px max(24px, calc(50vw - 400px)) 48px; }
+section {
+  background: #fff;
+  border: 1px solid #d4dde0;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+h2 { margin-top: 0; font-size: 1.3rem; }
+code { background: #eef3f4; padding: 1px 5px; border-radius: 4px; }
+
+.field-row { margin-bottom: 14px; }
+.field-row label { display: block; font-weight: 600; margin-bottom: 4px; }
+.field-inline { display: flex; gap: 10px; align-items: flex-start; }
+.field-inline label { font-weight: 400; margin: 0; }
+.optional { font-weight: 400; color: #59636e; }
+input[type="url"], input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #aab8bd;
+  border-radius: 6px;
+  font: inherit;
+}
+input[type="checkbox"] { margin-top: 5px; }
+button {
+  font: inherit;
+  padding: 8px 18px;
+  border: 1px solid #175a7a;
+  border-radius: 6px;
+  background: #175a7a;
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { background: #0f4a66; }
+.report-actions button { background: #fff; color: #175a7a; margin-right: 10px; }
+.report-actions button:hover { background: #eef3f4; }
+.error { color: #b3261e; font-weight: 600; min-height: 1.2em; }
+.status { color: #59636e; }
+
+.verdict { font-size: 1.05rem; }
+.grade {
+  display: inline-block;
+  font-weight: 700;
+  padding: 2px 12px;
+  border-radius: 12px;
+  margin-right: 10px;
+  color: #fff;
+  background: #59636e;
+}
+.grade[data-grade="pass"] { background: #1a7f37; }
+.grade[data-grade="fail"] { background: #b3261e; }
+
+.checks { list-style: none; padding: 0; }
+.checks > li {
+  border: 1px solid #d4dde0;
+  border-left-width: 5px;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+}
+.checks > li[data-status="pass"] { border-left-color: #1a7f37; }
+.checks > li[data-status="warn"] { border-left-color: #9a6700; }
+.checks > li[data-status="fail"] { border-left-color: #b3261e; }
+.checks > li[data-status="skipped"] { border-left-color: #59636e; }
+.check-head { display: flex; gap: 10px; align-items: baseline; }
+.chip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 10px;
+  color: #fff;
+  background: #59636e;
+}
+.chip-pass { background: #1a7f37; }
+.chip-warn { background: #9a6700; }
+.chip-fail { background: #b3261e; }
+.check-title { font-weight: 600; }
+.check-summary { margin: 6px 0; }
+.check-evidence {
+  list-style: none;
+  padding-left: 0;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+.check-evidence li {
+  padding: 3px 0 3px 14px;
+  border-left: 3px solid #d4dde0;
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+.check-evidence li[data-severity="fail"] { border-left-color: #b3261e; }
+.check-evidence li[data-severity="warn"] { border-left-color: #9a6700; }
+.check-evidence li[data-severity="pass"] { border-left-color: #1a7f37; }
+#export-json {
+  max-height: 420px;
+  overflow: auto;
+  background: #f6f8fa;
+  border: 1px solid #d4dde0;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 0.8rem;
+}
+#history-list, #directory-list { padding-left: 20px; }
+.site-footer {
+  padding: 20px max(24px, calc(50vw - 400px)) 40px;
+  color: #59636e;
+  font-size: 0.9rem;
+}
+
+/* Assistant layout. The runtime reads these variables for its chat, settings and
+   agent panels. White text sits on --ns-primary (the visitor's messages, Send, and
+   the chat form and settings buttons) and on --ns-accent (Send while a turn is
+   steered), so both keep at least 4.5:1 contrast with white. --ns-accent also
+   underlines the chat header. */
+.assistant { margin-top: 48px; }
+#agent-app {
+  --ns-font: system-ui, sans-serif;
+  --ns-bg: #ffffff;
+  --ns-fg: #1f2328;
+  --ns-primary: #175a7a;
+  --ns-accent: #7a4d10;
+  --ns-border: #d0d7de;
+  --ns-panelbg: #ffffff;
+  --ns-msgbg: #f6f8fa;
+  --ns-muted: #59636e;
+}
+.assistant-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 16px;
+  margin-top: 16px;
+}
+/* Set the height once the runtime has mounted the chat, so a failed load leaves no
+   empty box. */
+#agent-app.ns-composed-app [data-ns-slot="chat"] { height: 720px; }
+/* The runtime gives the chat no background of its own. Keep --ns-msgbg different from
+   --ns-bg, or bot replies lose their bubble. */
+#agent-app .ns-chat { background: var(--ns-bg); }
+/* Site-wide form rules often stretch the runtime's own controls. Undo them here. */
+#agent-app input[type="checkbox"],
+#agent-app input[type="radio"] { width: auto; }
+#agent-app .ns-header { flex-wrap: wrap; }
+#agent-app .ns-settings-body label { margin: 4px 0; font-weight: 400; }
+#agent-app .ns-w-label { font-family: inherit; }
+#agent-app .ns-widget label { margin: 0; }
+#agent-app .ns-w-radio label,
+#agent-app .ns-w-multi label,
+#agent-app .ns-w-toggle { font-weight: 400; }
+#agent-app .ns-w-toggle { font-size: 13px; }
+#agent-app button { margin: 0; }
+#agent-app .ns-w-choice { color: var(--ns-fg); }
+#agent-app .ns-devtoggle:not(.on):hover,
+#agent-app .ns-modal-close:hover { background: transparent; }
+#agent-app .ns-w-choice:disabled:hover { background: #fafbfc; }
+/* The runtime's message rule hides the partner consent card's own background, and its
+   Decline label then has too little contrast. */
+#agent-app .ns-consent { background: #fffbeb; }
+/* While a consent card waits, the status line above it already says "Contacting",
+   though nothing has been sent. Hide it until the visitor answers. */
+#agent-app .ns-msgs:has(.ns-consent-actions) > .ns-turn-status { display: none; }
+#agent-app .ns-msg { overflow-wrap: break-word; }
+#agent-app .ns-consent-actions { flex-wrap: wrap; }
+#agent-app .ns-consent-actions button { white-space: nowrap; }
+/* Dialogs site.js or the runtime add to <body> sit outside #agent-app. */
+body > dialog h2 { margin: 0 0 12px; font: 700 1.25em system-ui, sans-serif; }
+body > dialog button { margin-right: 8px; }
+.assistant-review { max-width: 640px; width: 85%; max-height: 85vh; overflow: auto; border: 1px solid #888; border-radius: 12px; padding: 24px; font: 16px system-ui, sans-serif; }
+.assistant-review dl { display: grid; grid-template-columns: fit-content(40%) 1fr; gap: 4px 16px; margin: 12px 0; }
+.assistant-review dt { font-weight: 600; }
+.assistant-review dd { margin: 0; overflow-wrap: anywhere; }
+.assistant-review details { margin: 12px 0; }
+.assistant-review pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.assistant-review .assistant-decline { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+@media (max-width: 760px) {
+  .assistant-panels { grid-template-columns: 1fr; }
+  .assistant-review dl { grid-template-columns: 1fr; gap: 0; }
+  .assistant-review dd { margin-bottom: 8px; }
+}

@@ -1,0 +1,74 @@
+{
+  "brand": {
+    "name": "AgentLint"
+  },
+  "networks": [
+    {
+      "name": "agentlint",
+      "front_man": "conformance_analyst",
+      "hocon": "./agentlint.network.json",
+      "description": "Audit an agentic website for Open Agentic Web MVP 0.2 conformance, explain what the spec requires, and export or save the report.",
+      "tags": [
+        "agentified-website"
+      ],
+      "sample_queries": [
+        "Audit http://127.0.0.1:8080 for me.",
+        "Run a full audit of https://agents.example, including a live call to its network.",
+        "What does the spec require a manifest to declare, and where?",
+        "The audit failed on allowed_peers — what does that finding mean?",
+        "Show me the last report as JSON and save its summary to my directory."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "byok_router": "https://api.otari.ai/api/v1",
+    "mock": false
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "note": "The AgentLint network calls no remote sites itself. A live audit call to an audited site happens only when the visitor turns it on, still behind the consent card, and runs on the visitor's key."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "agentlint",
+    "front_man": "conformance_analyst",
+    "available": false,
+    "reason": "Static site: there is no server to hold an MCP session; the same tools are exposed to callers through the action bridge."
+  },
+  "theme": {
+    "primary": "#175a7a"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "agentlint",
+        "front_man": "conformance_analyst",
+        "aliases": [
+          "agentlint",
+          "conformance_analyst"
+        ],
+        "url": "agentlint"
+      }
+    ],
+    "imports": [],
+    "link_updates": "browser-local"
+  },
+  "deployment": {
+    "mode": "static",
+    "notes": "Fully static bundle: public JSON, runtime/ and site JS only. No server, no build step at runtime. agent-manifest.json, links.json, agent-mcp.json, the .well-known files and the .network.json files need Access-Control-Allow-Origin that permits browser access."
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_audit_state",
+      "run_audit",
+      "export_report",
+      "save_to_directory"
+    ]
+  }
+}

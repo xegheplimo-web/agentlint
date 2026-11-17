@@ -1,0 +1,16 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "agentlint",
+      "front_man": "conformance_analyst",
+      "aliases": [
+        "agentlint",
+        "conformance_analyst"
+      ],
+      "url": "agentlint"
+    }
+  ],
+  "imports": [],
+  "link_updates": "browser-local"
+}

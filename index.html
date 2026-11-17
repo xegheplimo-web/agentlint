@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentLint — audit an agentic website</title>
+  <meta name="description" content="AgentLint audits other agentic websites for Open Agentic Web MVP 0.2 conformance and reports what it actually finds.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23175a7a'/%3E%3Cpath d='M4 8l3 3 5-6' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="audit.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <h1>AgentLint</h1>
+  <p class="tagline">An open agentic website that audits other agentic websites.</p>
+</header>
+
+<main>
+  <section aria-labelledby="audit-heading">
+    <h2 id="audit-heading">Audit a site</h2>
+    <p>Paste the address of an agentic website — the folder that should hold
+      <code>agent-manifest.json</code>. AgentLint fetches it and its published
+      network files, checks them against the Open Agentic Web MVP 0.2 minimum,
+      and shows exactly what it found. A CORS failure is a finding, not an error
+      to hide; a check that cannot run is reported as skipped, never as a pass.</p>
+    <form id="audit-form">
+      <div class="field-row">
+        <label for="audit-url">Site URL</label>
+        <input id="audit-url" name="url" type="url" required
+               placeholder="https://site.example or http://127.0.0.1:8080"
+               autocomplete="url" spellcheck="false">
+      </div>
+      <div class="field-row">
+        <label for="audit-network">Network name <span class="optional">(optional)</span></label>
+        <input id="audit-network" name="network" type="text"
+               placeholder="e.g. agentlint — leave empty to check every listed network"
+               autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field-row field-inline">
+        <input id="audit-live" name="live" type="checkbox">
+        <label for="audit-live">Also place a live call to the network through this
+          runtime's peer path (uses your AI provider key; you will be asked for
+          consent before anything is sent).</label>
+      </div>
+      <p id="audit-error" class="error" role="alert"></p>
+      <button id="audit-run" type="submit">Run audit</button>
+      <p id="audit-status" class="status" role="status"></p>
+    </form>
+  </section>
+
+  <section id="report-panel" hidden aria-labelledby="report-heading">
+    <h2 id="report-heading">Report</h2>
+    <p class="verdict"><span id="verdict-grade" class="grade"></span>
+    <span id="verdict-text"></span></p>
+    <ul id="checks-list" class="checks"></ul>
+    <div class="report-actions">
+      <button id="export-report" type="button">Show JSON export</button>
+      <button id="save-report" type="button">Save summary to directory</button>
+    </div>
+    <details id="export-panel" hidden>
+      <summary>Machine-readable report</summary>
+      <pre id="export-json"></pre>
+    </details>
+  </section>
+
+  <section id="history-panel" hidden aria-labelledby="history-heading">
+    <h2 id="history-heading">Audit history</h2>
+    <ul id="history-list"></ul>
+  </section>
+
+  <section id="directory-panel" hidden aria-labelledby="directory-heading">
+    <h2 id="directory-heading">Saved directory</h2>
+    <p>Report summaries saved from this browser, newest first.</p>
+    <ul id="directory-list"></ul>
+  </section>
+
+  <section id="assistant" class="assistant" aria-labelledby="assistant-heading">
+    <h2 id="assistant-heading">Ask AgentLint</h2>
+    <p>Ask the assistant to audit a site for you, explain a finding, tell you what
+      the Open Agentic Web spec requires, or export and save reports.</p>
+    <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. A live audit call to another site always asks for your consent first.</p>
+    <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+    <div id="agent-app">
+      <div data-ns-slot="header"></div>
+      <div class="assistant-panels">
+        <div data-ns-slot="chat"></div>
+        <div data-ns-slot="agents"></div>
+      </div>
+      <div data-ns-slot="settings"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>AgentLint audits the published files a site serves — it reports what is
+    really there, including the checks it could not evaluate. It does not judge
+    whether a site is honest or safe.</p>
+</footer>
+</body>
+</html>

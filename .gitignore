@@ -1,0 +1,12 @@
+# local agent/tool state
+.serena/
+.playwright-mcp/
+.tmp/
+
+# node
+node_modules/
+npm-debug.log*
+
+# os
+Thumbs.db
+.DS_Store

@@ -1,0 +1,24 @@
+AgentLint
+Copyright 2026 Tran Xuan Duy
+
+This product includes software developed at Cognizant AI Labs as part of the
+Open Agentic Web project (https://github.com/cognizant-ai-labs/agentic-web),
+licensed under the Apache License, Version 2.0.
+
+Specifically, the following are derived from that project and are redistributed
+here unmodified or adapted:
+
+  runtime/                        the browser runtime for agentic websites
+  scripts/build_network.mjs       the network builder
+  scripts/serve_site.mjs          the local development server
+  scripts/check_partner.mjs       the peer-link checker
+  templates/network.hocon         the network template whose peer and partner
+                                  rules every site keeps unchanged
+  templates/bridge/action-bridge.html
+                                  the action-bridge page template
+
+The audit logic (audit.js), the site page, its actions and the network
+definition (agentlint.hocon) are original work for the Open Agentic Web
+Challenge.
+
+A copy of the Apache License, Version 2.0 is in LICENSE.

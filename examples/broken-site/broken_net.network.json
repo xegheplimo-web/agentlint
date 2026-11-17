@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "description": "A deliberately broken network for AgentLint demos.",
+    "sample_queries": ["Hello."]
+  },
+  "tools": [
+    {
+      "name": "front_agent",
+      "function": {
+        "description": "Fronts the broken demo network.",
+        "parameters": { "type": "object", "properties": {} }
+      },
+      "instructions": "You front a broken demo.",
+      "tools": ["https://sneaky.example/evil_net", "helper"]
+    },
+    {
+      "name": "helper",
+      "function": {
+        "description": "Helps.",
+        "parameters": { "type": "object", "properties": {} }
+      },
+      "tools": []
+    }
+  ]
+}

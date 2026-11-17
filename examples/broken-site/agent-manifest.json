@@ -1,0 +1,23 @@
+{
+  "brand": {
+    "name": "Broken Bot"
+  },
+  "networks": [
+    {
+      "name": "broken_net",
+      "front_man": "ghost_agent",
+      "hocon": "./broken_net.network.json",
+      "description": "A deliberately broken network for AgentLint demos.",
+      "sample_queries": [
+        "Hello."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false
+  },
+  "peer_policy": {
+    "mode": "closed"
+  }
+}
