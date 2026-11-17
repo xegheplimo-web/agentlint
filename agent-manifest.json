@@ -1,7 +1,5 @@
 {
-  "brand": {
-    "name": "AgentLint"
-  },
+  "brand": "🐴 AgentLint",
   "networks": [
     {
       "name": "agentlint",
